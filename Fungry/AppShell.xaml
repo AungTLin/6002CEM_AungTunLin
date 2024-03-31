@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Fungry.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:local="clr-namespace:Fungry"
+    xmlns:pages="clr-namespace:Fungry.Themes" 
+    Shell.FlyoutBehavior="Flyout"
+    Title="Fungry">
+
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="SeaGreen" StatusBarStyle="Default"/>
+    </Shell.Behaviors>
+   
+   
+
+   <ShellContent ContentTemplate="{DataTemplate pages:Onbopage}"
+                 Shell.FlyoutBehavior="Disabled" 
+                 Shell.FlyoutItemIsVisible="False"
+                 Route="Onbopage"/>
+
+
+    <TabBar FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate pages:home}"
+        Icon="homeicon"
+        Route="home"/>
+
+        <ShellContent
+    Title="Store"
+    ContentTemplate="{DataTemplate pages:storecart}"
+    Icon="homeicon"
+    Route="storecart"/>
+
+        <ShellContent
+    Title="account"
+    ContentTemplate="{DataTemplate pages:Account}"
+    Icon="homeicon"
+    Route="Account"/>
+    </TabBar>
+
+    <MenuItem Text="Singout"
+              IconImageSource="home"
+              Clicked="Signout_Clicked"/>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+
+            <Grid 
+                  ColumnDefinitions="Auto, *, Auto"
+                  Padding="10"
+                  ColumnSpacing="15"
+                RowSpacing="5"
+                RowDefinitions="Auto, Auto">
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HeightRequest="24"
+                    Source="{Binding FlyoutIcon}"
+                    WidthRequest="24">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="SeaGreen"/>
+                    </Image.Behaviors>
+
+                </Image>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontSize="16"
+                    Text="{Binding Title}" 
+                    TextColor="LightSeaGreen"/>
+
+                <Image 
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       Source="rightarrow"
+                       WidthRequest="24">
+
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="SeaGreen"/>
+                    </Image.Behaviors>
+                </Image>
+                
+                <BoxView Grid.Row="1"
+                         Grid.ColumnSpan="3"
+                         HeightRequest="1"/>
+
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <Shell.MenuItemTemplate>
+
+        <DataTemplate>
+
+        <Grid 
+            ColumnDefinitions="Auto, *"
+            Padding="10"
+            ColumnSpacing="15"
+          RowSpacing="5"
+          RowDefinitions="Auto, Auto">
+                <Image
+              Grid.Row="0"
+              Grid.Column="0"
+              HeightRequest="24"
+              Source="{Binding Icon}"
+              WidthRequest="24">
+
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="SeaGreen"/>
+                    </Image.Behaviors>
+                </Image>
+
+
+                <Label
+              Grid.Row="0"
+              Grid.Column="1"
+              FontSize="16"
+              Text="{Binding Text}" 
+              TextColor="LightSeaGreen"/>
+            
+                <BoxView Grid.Row="1"
+                   Grid.ColumnSpan="3"
+                   HeightRequest="1"/>
+
+            </Grid>
+        </DataTemplate>
+
+    </Shell.MenuItemTemplate>
+
+    <Shell.FlyoutHeader>
+        <Border BackgroundColor="Aquamarine"
+                Padding ="10"
+                StrokeThickness="0">
+            <VerticalStackLayout HorizontalOptions="Center"
+                                 Spacing="10">
+                <Image Source ="foodgry"
+                       HeightRequest="150"
+                       WidthRequest="150"
+                       HorizontalOptions="Center"/>
+                <Label Text="Hunger Food"
+                       HorizontalOptions="Center"
+                       FontSize="18"
+                       TextColor="DodgerBlue"
+                       TextTransform="Uppercase"
+                       FontAttributes="Bold"/>
+            </VerticalStackLayout>
+        </Border>
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <Border 
+            Padding="10"
+            BackgroundColor="DarkGoldenrod"
+            StrokeThickness="0">
+            <Label
+                FontAttributes="Bold"
+                FontSize="15"
+                HorizontalOptions="Center"
+                Text="Aung Tun Lin"
+                TextColor="Silver"/>
+            
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="FlyoutFooter_Tapped"/>
+            </Border.GestureRecognizers>
+        </Border>
+    </Shell.FlyoutFooter>
+
+
+</Shell>

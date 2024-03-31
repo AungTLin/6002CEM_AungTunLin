@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Fungry.ViewMo"
+             xmlns:dto="clr-namespace:fungry.lib.Dtos;assembly=fungry.lib"
+             x:Class="Fungry.Themes.OrdDetail"
+             x:DataType="vm:Vieworddtl"
+             Title="{Binding Title}"
+             BackgroundColor="Wheat">
+
+
+    <Grid>
+        <ScrollView Padding="10">
+            <CollectionView ItemsSource="{Binding OrderItems}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:OrderItemDto">
+                        <StackLayout
+                            Margin="0,5"
+                            Padding="0,0,0,1"
+                            BackgroundColor="LightCyan">
+                            <StackLayout Padding="10" BackgroundColor="PeachPuff">
+                                <Grid ColumnDefinitions="40, *, Auto">
+                                    <Label
+                                        Grid.Column="0"
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        Text="{Binding Quant}"
+                                        VerticalOptions="Center" />
+                                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                        <Label
+                                            FontSize="15"
+                                            Text="{Binding Name}"
+                                            TextColor="SeaGreen" />
+                                        <Label FontSize="12">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Taste}" TextColor="Red" />
+                                                    <Span Text=", " />
+                                                    <Span Text="{Binding Extra}" TextColor="Black" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                    <Label
+                                        Grid.Column="2"
+                                        FontAttributes="Bold"
+                                        FontSize="15"
+                                        Text="{Binding TotalPrice, StringFormat='{0:C}'}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:maui="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:vm ="clr-namespace:Fungry.ViewMo"
+             x:Class="Fungry.Themes.Alldetails"
+             Shell.PresentationMode="ModalAnimated"
+             xmlns:dto ="clr-namespace:fungry.lib.Dtos;assembly=fungry.lib"
+             xmlns:models="clr-namespace:Fungry.Models"
+             x:DataType="vm:DetailsViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="quantBtn" TargetType="ImageButton" >
+                <Setter Property="BackgroundColor" Value="Goldenrod"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="Padding" Value="5"/>
+
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid RowDefinitions="Auto,* ,Auto" Padding="10, 30, 10, 10">
+            <VerticalStackLayout Grid.Row="0" HorizontalOptions="Center" Spacing="10">
+                <Image
+                Aspect="AspectFit"
+                HeightRequest="250"
+                HorizontalOptions="Center"
+                Source="{Binding Food.Image}"
+                WidthRequest="250"/>
+                <Label
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="{Binding Food.Name}"
+                TextColor="SeaGreen"/>
+                <Label Text="{Binding Food.Price,StringFormat='{0:C}'}"
+                   TextColor="SeaGreen"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+            <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Options}"
+                        VerticalOptions="Center">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Span="2"
+                                 Orientation="Vertical"
+                                 VerticalItemSpacing="10"
+                                 HorizontalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:FoodOption" >
+                        <Border StrokeShape="RoundRectangle 5"
+                            Stroke="Gray"
+                            Padding="5">
+                            <Border.Triggers>
+                                <DataTrigger TargetType="Border"
+                                             Binding="{Binding IsSelected}"
+                                             Value="True">
+                                    <Setter Property="Stroke" Value="Tomato"/>
+                                    <Setter Property="StrokeThickness" Value="5"/>
+
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <VerticalStackLayout Spacing="5">
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="{Binding Taste}"/>
+                                    <Label Text="Taste"
+                                       TextColor="DarkBlue"
+                                       FontSize="16"
+                                       FontAttributes="Bold"/>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="2">
+                                    <Label FontAttributes="Bold"
+                                     FontSize="16"
+                                     Text="{Binding Extra}"
+                                     TextColor="DarkBlue"/>
+                                    <Label FontSize="13" Text="Extra"/>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:DetailsViewModel}}, Path=SelectOptionCommand}"
+                                                      CommandParameter="{Binding .}"/>
+
+
+                            </Border.GestureRecognizers>
+
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <VerticalStackLayout Grid.Row="2" VerticalOptions="End"
+                             Spacing="15">
+                <Grid ColumnDefinitions="*, 100, *">
+                    <ImageButton Grid.Column="0" 
+                             Source="minus" 
+                             Style="{x:StaticResource quantBtn}"
+                             Command ="{Binding DecreaseQuantityCommand}"
+                             IsEnabled="True">
+                        <ImageButton.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="PaleGreen"/>
+                        </ImageButton.Behaviors>
+
+                    </ImageButton>
+
+                    <Label Grid.Column="1" 
+                       Text="{Binding Quant }"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold"
+                       FontSize="18"/>
+                    <ImageButton Grid.Column="2"
+                             Source="plus" 
+                             Style="{x:StaticResource quantBtn}"
+                             Command ="{Binding IncreaseQuantityCommand}">
+                        <ImageButton.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="PaleGreen"/>
+                        </ImageButton.Behaviors>
+
+                    </ImageButton>
+                </Grid>
+
+                <Button Text="Add cart" Command="{Binding AddToCartCommand}"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <ImageButton Source="cross"
+                     HorizontalOptions="End"
+                     VerticalOptions="End"
+                     BackgroundColor="DarkMagenta"
+                     HeightRequest="50"
+                     WidthRequest="50"
+                     CornerRadius="25"
+                     Padding="5"
+                     Margin="5"
+                     Command ="{Binding GoBackCommand}">
+            <ImageButton.Behaviors>
+                <toolkit:IconTintColorBehavior TintColor="Wheat"/>
+            </ImageButton.Behaviors>
+            
+        </ImageButton>
+                     
+    </Grid>
+</ContentPage>

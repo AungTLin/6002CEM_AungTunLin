@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Fungry.ViewMo"  
+             x:Class="Fungry.Themes.Signin"
+             Title="Signin"
+            Shell.FlyoutBehavior = "Disabled"
+             x:DataType="vm:AuthViewModel">
+
+    <Grid>
+        <VerticalStackLayout VerticalOptions="Center"
+                         Padding="20"
+                         Spacing="13">
+            <Image Source="Foodgry"
+               HeightRequest="150"
+               WidthRequest="150"
+               Aspect="AspectFit"/>
+
+            
+
+
+            <Entry Text ="{Binding Email}"
+               Keyboard="Email"
+               Placeholder="Email"/>
+
+            <Entry Text ="{Binding Password}"
+               IsPassword="True"
+                Placeholder="Password"/>
+
+           
+
+            <Label Text ="New user? then Signup"
+               FontSize="18"
+               FontAttributes="Bold"
+               TextColor="CadetBlue">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SignupLabel_Tapped"/>
+                </Label.GestureRecognizers>
+
+            </Label>
+
+            <Button Text="Signin"
+                IsEnabled="{Binding CanSignin}"
+                Command="{Binding SigninCommand}"/>
+
+
+        </VerticalStackLayout>
+
+        <ActivityIndicator 
+                       IsRunning="{Binding IsBusy}"/>
+    </Grid>
+</ContentPage>

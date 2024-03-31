@@ -1,0 +1,79 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dto ="clr-namespace:fungry.lib.Dtos;assembly=fungry.lib"
+             xmlns:models="clr-namespace:Fungry.Models"
+             xmlns:vm ="clr-namespace:Fungry.ViewMo"
+             xmlns:toolkit ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Fungry.Themes.storecart"
+             Title="storecart"
+             x:DataType="vm:CartVIewModel"
+             Background="Wheat">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Clear Cart" Command="{Binding ClearCartCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid Padding="10 ">
+        <ScrollView Padding ="0, 0, 0, 80">
+            <CollectionView ItemsSource="{Binding Storecarts}">
+                <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Storecart">
+                    <Border StrokeShape="Rectangle 10"
+                            Stroke="LightBlue"
+                            BackgroundColor="LightBlue"
+                            Padding="12">
+                    
+                    <Grid ColumnDefinitions="40, * , Auto ,50 ">
+                        <Label 
+                               Grid.Column="0"
+                               Text="{Binding Quant}"
+                               VerticalOptions="Center"
+                               FontSize="19"
+                               FontAttributes="Italic"/>
+                            <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                <Label Text="{Binding Name}"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"/>
+
+                                <Label FontSize="13">
+                                    <Label.FormattedText>
+                                        <FormattedString>   
+                                        <Span Text="{Binding TasteName}"/>
+                                            <Span Text=", "/>
+                                            <Span Text="{Binding ExtraName}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2"
+                               Text="{Binding TotatPrice, StringFormat='{0:C}'}"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End"/>
+                            <ImageButton Grid.Column="3"
+                                     Source="trash"
+                                         HeightRequest="25"
+                                         WidthRequest="25"
+                                         VerticalOptions="Center"
+                                         HorizontalOptions="End"
+                                         Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:CartVIewModel}}, Path=RemoveCartItemCommand}"
+                                         CommandParameter="{Binding Id}">
+                                <ImageButton.Behaviors>
+                                    <toolkit:IconTintColorBehavior TintColor="Yellow"/>
+                                </ImageButton.Behaviors>
+                            </ImageButton>
+
+                        </Grid>
+                    </Border>
+
+                </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        <Button Text="Place Order" VerticalOptions="End"
+                HorizontalOptions="Center"
+                Command="{Binding PlaceOrderCommand}"/>
+        <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+    </Grid>
+    
+</ContentPage>

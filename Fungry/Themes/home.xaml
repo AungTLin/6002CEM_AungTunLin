@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Fungry.ViewMo"
+             x:Class="Fungry.Themes.home"
+             Title="home"
+             Shell.NavBarIsVisible="False"
+             x:DataType="vm:HomeViewModel"
+             xmlns:dto="clr-namespace:fungry.lib.Dtos;assembly=fungry.lib"
+             BackgroundColor="Bisque">
+
+    <Grid>
+
+        <ScrollView>
+            <VerticalStackLayout Padding="10, 25, 10, 10">
+                <VerticalStackLayout Spacing="10" Margin="0,0,0,25">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="35"
+                        Text="{Binding UserName,StringFormat='Hello {0}'}"/>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="What is your lunch?"/>
+
+                </VerticalStackLayout>
+                <CollectionView ItemsSource="{Binding Foods}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                         Span="2"
+                                         VerticalItemSpacing="15"
+                                         HorizontalItemSpacing="15"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="dto:FoodDto">
+                            <Border Background="Yellow"
+                                   StrokeThickness="0"
+                                   StrokeShape="Rectangle 15">
+                                <Grid RowDefinitions="*, Auto, Auto">
+                                    <Image Grid.Row="0"
+                                           Source ="{Binding Image}"
+                                           HeightRequest="200"
+                                           Aspect="AspectFill"/>
+                                    <Label Grid.Row="1"
+                                           Text="{Binding Name}"
+                                           FontSize="15"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,10"
+                                           TextColor="DarkOrange"
+                                           FontAttributes="Bold"/>
+                                    <Label Grid.Row ="2"
+                                           Text="{Binding Price,StringFormat='{0;C}'}"
+                                           FontSize="17"
+                                           HorizontalOptions="End"
+                                           FontAttributes="Bold"
+                                           Padding="5"/>
+
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomeViewModel}},Path=GoToDetailsPageCommand}"
+                                                          CommandParameter="{Binding .}"/>
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            
+
+
+
+        </ScrollView>
+        
+        <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+       
+    </Grid>
+   
+</ContentPage>

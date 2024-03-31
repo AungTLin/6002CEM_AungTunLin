@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Fungry.ViewMo"
+             x:DataType="vm:ProfileViewModel"
+             x:Class="Fungry.Themes.Account"
+             Title="Account"
+             BackgroundColor="BlanchedAlmond">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="MenuLbl">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="TextColor" Value="DeepSkyBlue"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="Auto, *, Auto" Padding="15, 25, 15, 15">
+        <HorizontalStackLayout Grid.Row="0" Spacing="15" HorizontalOptions="Center">
+            <Border StrokeShape="RoundRectangle 25"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    BackgroundColor="SeaGreen">
+                <Label Text="{Binding Initials}"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontAttributes="Bold"
+                       FontSize="25"/>
+            </Border>
+            <Label Text="{Binding Name}"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   TextColor="BlueViolet"/>
+
+        </HorizontalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1"
+                             VerticalOptions="Center">
+            <Label Text="My Orders"
+                   Style="{x:StaticResource MenuLbl}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToMyOrdersCommand}"/>
+
+
+                </Label.GestureRecognizers>
+            </Label>
+            <BoxView HeightRequest="1"
+                     Color="Black"
+                     Margin="0,10"/>
+
+            <Label Text="Password );"
+       Style="{x:StaticResource MenuLbl}"/>
+            <BoxView HeightRequest="1"
+         Color="Black"
+         Margin="0,10"/>
+            
+        </VerticalStackLayout>
+        <Button Grid.Row="2"
+                Text="Signout"
+                HeightRequest="30"
+                WidthRequest="100"
+                FontAttributes="Bold"
+                FontSize="16"
+                Padding="0"
+                Command="{Binding SignoutCommand}"
+                />
+    </Grid>
+</ContentPage>

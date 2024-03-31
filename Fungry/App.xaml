@@ -1,0 +1,40 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Fungry"
+    x:Class="Fungry.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="SeaGreen"/>
+                <Setter Property="TextColor" Value="white"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="CornerRadius" Value="26"/>
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="WidthRequest" Value="250"/>
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="TextColor" Value="CadetBlue"/>
+                <Setter Property="PlaceholderColor" Value="BlueViolet"/>
+            </Style>
+
+            <Style TargetType="Editor">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="TextColor" Value="CadetBlue"/>
+                <Setter Property="PlaceholderColor" Value="BlueViolet"/>
+            </Style>
+            <Style TargetType="ActivityIndicator">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Color" Value="DeepSkyBlue"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

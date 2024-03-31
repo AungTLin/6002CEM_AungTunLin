@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit ="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:Fungry.ViewMo"
+             xmlns:dto="clr-namespace:fungry.lib.Dtos;assembly=fungry.lib"
+             x:Class="Fungry.Themes.order"
+             Title="order"
+             x:DataType="vm:OrdersViewModel"
+             BackgroundColor="Aqua">
+    <RefreshView Command="{Binding LoadOrdersCommand}" IsRefreshing="{Binding IsBusy}">
+        <Grid>
+            <ScrollView Padding="10">
+                <CollectionView ItemsSource="{Binding Orders}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="dto:OrderDto">
+                            <Border
+                                Margin="0,4"
+                                Padding="10"
+                                BackgroundColor="White"
+                                StrokeShape="RoundRectangle 10"
+                                StrokeThickness="0">
+                                <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="10">
+                                    <Grid
+                                        Grid.Column="0"
+                                        RowDefinitions="*, Auto"
+                                        RowSpacing="2">
+                                        <Label
+                                            Grid.Row="0"
+                                            FontSize="15"
+                                            Text="{Binding Id, StringFormat='Order Id: {0}'}"
+                                            TextColor="SeaGreen" />
+                                        <Label
+                                            Grid.Row="1"
+                                            FontSize="13"
+                                            Text="{Binding ItemCountDisplay}" />
+                                    </Grid>
+
+                                    <Grid
+                                        Grid.Column="1"
+                                        RowDefinitions="*, *"
+                                        RowSpacing="2">
+                                        <Label
+                                            Grid.Row="0"
+                                            FontAttributes="Bold"
+                                            FontSize="15"
+                                            HorizontalOptions="End"
+                                            Text="{Binding TotalPrice, StringFormat='{0:C}'}"
+                                            TextColor="SeaGreen" />
+                                        <Label
+                                            Grid.Row="1"
+                                            FontSize="13"
+                                            Text="{Binding OrderAt, StringFormat='{0: MMM dd yyyy, hh:mm}'}" />
+                                    </Grid>
+
+                                    <Image
+                                        Grid.Column="2"
+                                        Source="right_arrow"
+                                        VerticalOptions="Center">
+                                        <Image.Behaviors>
+                                            <toolkit:IconTintColorBehavior TintColor="Cyan" />
+                                        </Image.Behaviors>
+                                    </Image>
+
+                                </Grid>
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:OrdersViewModel}}, Path=GoToOrdDetailCommand}"
+                                                          CommandParameter="{Binding Id}"/>
+                                </Border.GestureRecognizers>
+
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" />
+        </Grid>
+    </RefreshView>
+
+
+</ContentPage>

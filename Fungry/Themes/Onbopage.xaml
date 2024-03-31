@@ -1,0 +1,41 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fungry.Themes.Onbopage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*, Auto"
+          Padding="0, 0, 0, 40">
+        <VerticalStackLayout
+            Grid.Row="0" Spacing ="20"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Image
+                Aspect="AspectFill"
+                HeightRequest="250"
+                Source="foodgry"
+                WidthRequest="250"/>
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="Welcome"/>
+            <Label
+                FontAttributes="Bold"
+                FontSize="25"
+                HorizontalOptions="Center"
+                Text="Foodgry"/>
+            <Label
+              
+              FontSize="18"
+              HorizontalOptions="Center"
+              Text="My food hugry"/>  
+
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="1"
+                             Spacing="20"
+                             HorizontalOptions="Center">
+            <Button Text="Signup" Clicked="Signup_btn"/>
+            <Button Text=" Singin" Clicked="Signin_btn"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
